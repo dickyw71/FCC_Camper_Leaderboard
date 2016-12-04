@@ -13,8 +13,8 @@ var CamperLeaderboard = React.createClass({
 var CamperTablePanel = React.createClass({
   render: function() {
     return (
-      <div className="jumbotron">
-        <h3 className="text-center">Camper Leaderboard</h3>
+      <div className="camper-table-panel">
+        <h2 className="text-center">Camper Leaderboard</h2>
         <CamperTable urls={this.props.urls}/>
       </div>
     );
@@ -24,7 +24,6 @@ var CamperTablePanel = React.createClass({
 var CamperTable = React.createClass({
   
   getFccUserScores: function() {
-    //console.log(this.props.urls)
     var _this = this;
     this.serverRequest =
       axios.all([axios.get(_this.props.urls[0]), axios.get(_this.props.urls[1])])
@@ -73,19 +72,20 @@ var CamperTable = React.createClass({
       });      
     }
     return (
-      <table className="table table-bordered table-striped">
+      <table className="table table-hover">
             <CamperTableHeader
               onClickLast30Days={this.handlePointsInLast30Days}
               onClickAllTime={this.handleAllTimePoints}
+              showRecent={this.state.showRecent}
               />
             <tbody>{rows}</tbody>
-          </table>
+      </table>
     );
   }
 });
 
 var CamperTableHeader = React.createClass({
-
+  
   handlePointsInLast30Days: function() {
     this.props.onClickLast30Days();
   },
@@ -93,7 +93,8 @@ var CamperTableHeader = React.createClass({
     this.props.onClickAllTime();
   },
 
-  render: function() {
+  render: function() {  
+    const showRecent = this.props.showRecent;
     return (
       <thead>
           <tr>
@@ -102,13 +103,20 @@ var CamperTableHeader = React.createClass({
             <th>
               <a 
                 onClick={this.handlePointsInLast30Days}
-                >Points in last 30 days
-              <i className="fa fa-sort-amount-desc" aria-hidden="true"></i></a>
+                >Points in last 30 days             
+                { showRecent &&
+                    <i className="fa fa-sort-amount-desc" aria-hidden="true">
+                  </i> 
+                }
+                </a>
             </th>
             <th>
               <a 
                 onClick={this.handleAllTimePoints}
                 >All time points
+                { !showRecent &&
+                <i className="fa fa-sort-amount-desc" aria-hidden="true"></i>
+                  }
               </a>
             </th>
           </tr>
