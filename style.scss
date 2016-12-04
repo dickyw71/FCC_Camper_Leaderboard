@@ -1,9 +1,19 @@
 .camper-leaderboard {
-  
+  background-color: #D4E9FA;
+  .camper-table-panel {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+  }
   .camper-img {
-    border: 2px solid black;
     border-radius: 5px;
-    width: 60px;
+    width: 40px;
     margin: 5px;
+  }
+  a {
+    cursor: pointer;
+    i {
+      margin: 5px;
+
+    }
   }
 }
