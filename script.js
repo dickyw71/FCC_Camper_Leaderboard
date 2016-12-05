@@ -2,9 +2,10 @@ var CamperLeaderboard = React.createClass({
   render: function() {
     return (
       <div className="container camper-leaderboard">
-        <div className="page-header">
-          <CamperTablePanel urls={this.props.urls}/>
+        <div className="page-header h1">Free Code Camp<i className="fa fa-free-code-camp" aria-hidden="true"></i>
+          points board
         </div>
+          <CamperTablePanel urls={this.props.urls}/>
       </div>
     );
   }
@@ -14,7 +15,7 @@ var CamperTablePanel = React.createClass({
   render: function() {
     return (
       <div className="camper-table-panel">
-        <h2 className="text-center">Camper Leaderboard</h2>
+        
         <CamperTable urls={this.props.urls}/>
       </div>
     );
@@ -72,7 +73,7 @@ var CamperTable = React.createClass({
       });      
     }
     return (
-      <table className="table table-hover">
+      <table className="table">
             <CamperTableHeader
               onClickLast30Days={this.handlePointsInLast30Days}
               onClickAllTime={this.handleAllTimePoints}
@@ -99,24 +100,23 @@ var CamperTableHeader = React.createClass({
       <thead>
           <tr>
             <th>#</th>
-            <th>Camper Name</th>
+            <th>Camper</th>
             <th>
               <a 
                 onClick={this.handlePointsInLast30Days}
-                >Points in last 30 days             
-                { showRecent &&
-                    <i className="fa fa-sort-amount-desc" aria-hidden="true">
-                  </i> 
-                }
-                </a>
+                >{ showRecent &&
+                    <i className="fa fa-sort-amount-desc" aria-hidden="true"></i> 
+                 }
+                last 30 days             
+              </a>
             </th>
             <th>
               <a 
                 onClick={this.handleAllTimePoints}
-                >All time points
-                { !showRecent &&
+                >{ !showRecent &&
                 <i className="fa fa-sort-amount-desc" aria-hidden="true"></i>
                   }
+                all time    
               </a>
             </th>
           </tr>
